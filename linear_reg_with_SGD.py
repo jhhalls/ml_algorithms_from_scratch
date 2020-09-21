@@ -1,3 +1,7 @@
+'''
+@author : jhhalls
+'''
+
 # Linear Regression With Stochastic Gradient Descent 
 
 from random import seed
@@ -114,20 +118,20 @@ def linear_regression_sgd(train, test, l_rate, n_epoch):
 		predictions.append(yhat)
 	return(predictions)
 
-# Linear Regression on wine quality dataset
-seed(1)
-# load and prepare data
-filename = 'winequality-white.csv'
-dataset = load_csv(filename)
-for i in range(len(dataset[0])):
-	str_column_to_float(dataset, i)
-# normalize
-minmax = dataset_minmax(dataset)
-normalize_dataset(dataset, minmax)
-# evaluate algorithm
-n_folds = 5
-l_rate = 0.01
-n_epoch = 50
-scores = evaluate_algorithm(dataset, linear_regression_sgd, n_folds, l_rate, n_epoch)
-print('Scores: %s' % scores)
-print('Mean RMSE: %.3f' % (sum(scores)/float(len(scores))))
+# # Linear Regression on wine quality dataset
+# seed(1)
+# # load and prepare data
+# filename = 'winequality-white.csv'
+# dataset = load_csv(filename)
+# for i in range(len(dataset[0])):
+# 	str_column_to_float(dataset, i)
+# # normalize
+# minmax = dataset_minmax(dataset)
+# normalize_dataset(dataset, minmax)
+# # evaluate algorithm
+# n_folds = 5
+# l_rate = 0.01
+# n_epoch = 50
+# scores = evaluate_algorithm(dataset, linear_regression_sgd, n_folds, l_rate, n_epoch)
+# print('Scores: %s' % scores)
+# print('Mean RMSE: %.3f' % (sum(scores)/float(len(scores))))

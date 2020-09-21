@@ -1,19 +1,13 @@
 # A test harness provides a consistent way to evaluate machine learning algorithms on a dataset.
 
 # It involves 3 elements:
-# 1 - The resampling method to split-up the dataset.
-# 2 - The machine learning algorithm to evaluate.
-# 3 - The performance measure by which to evaluate predictions.
-
-# The loading and preparation of a dataset is a prerequisite step that must have been completed prior to using the test harness.
-
-# The test harness must allow for different machine learning algorithms to be evaluated, whilst the dataset, resampling method and performance measures are kept constant.
-
-# In this tutorial, we are going to demonstrate the test harnesses with a real dataset.
+# 1 - Preprocess the data and split up into train and test sets.
+# 2 - Make machine learning models.
+# 3 - Measure the Performance and evaluate the predictions.
 
 # The dataset used is the Pima Indians diabetes dataset. It contains 768 rows and 9 columns. All of the values in the file are numeric, specifically floating point values.
 
-# The Zero Rule algorithm will be evaluated as part of the tutorial. The Zero Rule algorithm always predicts the class that has the most observations in the training dataset.
+#  The Zero Rule algorithm always predicts the class that has the most observations in the training dataset.
 
 # 1. Train-Test Algorithm Test Harness
 from random import seed
@@ -42,6 +36,15 @@ def train_test_split(dataset, split):
 		train.append(dataset_copy.pop(index))
 	return train, dataset_copy
 
+
+# zero rule algorithm for classification
+def zero_rule_algorithm_classification(train, test):
+	output_values = [row[-1] for row in train]
+	prediction = max(set(output_values), key=output_values.count)
+	predicted = [prediction for i in range(len(test))]
+	return predicted
+
+
 # Calculate accuracy percentage
 def accuracy_metric(actual, predicted):
 	correct = 0
@@ -63,24 +66,18 @@ def evaluate_algorithm(dataset, algorithm, split, *args):
 	accuracy = accuracy_metric(actual, predicted)
 	return accuracy
 
-# zero rule algorithm for classification
-def zero_rule_algorithm_classification(train, test):
-	output_values = [row[-1] for row in train]
-	prediction = max(set(output_values), key=output_values.count)
-	predicted = [prediction for i in range(len(test))]
-	return predicted
 
-# Test the zero rule algorithm on the diabetes dataset
-seed(1)
-# load and prepare data
-filename = 'pima-indians-diabetes.data.csv'
-dataset = load_csv(filename)
-for i in range(len(dataset[0])):
-	str_column_to_float(dataset, i)
-# evaluate algorithm
-split = 0.6
-accuracy = evaluate_algorithm(dataset, zero_rule_algorithm_classification, split)
-print('Accuracy: %.3f%%' % (accuracy))
+# # Test the zero rule algorithm on the diabetes dataset
+# seed(1)
+# # load and prepare data
+# filename = 'pima-indians-diabetes.data.csv'
+# dataset = load_csv(filename)
+# for i in range(len(dataset[0])):
+# 	str_column_to_float(dataset, i)
+# # evaluate algorithm
+# split = 0.6
+# accuracy = evaluate_algorithm(dataset, zero_rule_algorithm_classification, split)
+# print('Accuracy: %.3f%%' % (accuracy))
 
 # 2. Cross-Validation Algorithm Test Harness
 # Split a dataset into k folds
@@ -122,15 +119,15 @@ def zero_rule_algorithm_classification(train, test):
 	predicted = [prediction for i in range(len(test))]
 	return predicted
 
-# Test the zero rule algorithm on the diabetes dataset
-seed(1)
-# load and prepare data
-filename = 'pima-indians-diabetes.data.csv'
-dataset = load_csv(filename)
-for i in range(len(dataset[0])):
-	str_column_to_float(dataset, i)
-# evaluate algorithm
-n_folds = 5
-scores = evaluate_algorithm(dataset, zero_rule_algorithm_classification, n_folds)
-print('Scores: %s' % scores)
-print('Mean Accuracy: %.3f%%' % (sum(scores)/len(scores)))
+# # Test the zero rule algorithm on the diabetes dataset
+# seed(1)
+# # load and prepare data
+# filename = 'pima-indians-diabetes.data.csv'
+# dataset = load_csv(filename)
+# for i in range(len(dataset[0])):
+# 	str_column_to_float(dataset, i)
+# # evaluate algorithm
+# n_folds = 5
+# scores = evaluate_algorithm(dataset, zero_rule_algorithm_classification, n_folds)
+# print('Scores: %s' % scores)
+# print('Mean Accuracy: %.3f%%' % (sum(scores)/len(scores)))

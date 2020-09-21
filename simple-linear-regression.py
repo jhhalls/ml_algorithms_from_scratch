@@ -1,23 +1,30 @@
+'''
+@author : jhhalls
+'''
 # Simple Linear Regression
-# Linear regression assumes a linear or straight line relationship between the input variables (X) and the single output variable (y).
+# Linear regression assumes a linear or straight line relationship between the input variables (X) and
+#   the single output variable (y).
 
-# More specifically, that output (y) can be calculated from a linear combination of the input variables (X). When there is a single input variable, the method is referred to as a simple linear regression.
+# More specifically, that output (y) can be calculated from a linear combination of the input variables (X). 
+# When there is a single input variable, the method is referred to as a simple linear regression.
 
-# In simple linear regression we can use statistics on the training data to estimate the coefficients required by the model to make predictions on new data.
+# In simple linear regression we can use statistics on the training data to estimate the coefficients required by the model
+# to make predictions on new data.
 
 # The line for a simple linear regression model can be written as:
-# y = b0 + b1 * x where b0 and b1 are the coefficients we must estimate from the training data.
-
-# Once the coefficients are known, we can use this equation to estimate output values for y given new input examples of x.
+# y = (b0 + b1 * x) 
+# where, 
+# b0, b1 are the coefficients we must estimate from the training data.
 
 # It requires that you calculate statistical properties from the data such as mean, variance and covariance.
 
-# All the algebra has been taken care of and we are left with some arithmetic to implement to estimate the simple linear regression coefficients.
+# All the algebra has been taken care of and we are left with some arithmetic to implement to estimate the 
+# simple linear regression coefficients.
 
 # Briefly, we can estimate the coefficients as follows:
-# B1 = sum((x(i) - mean(x)) * (y(i) - mean(y))) / sum( (x(i) - mean(x))^2 )
-# B0 = mean(y) - B1 * mean(x)
-# where the i refers to the value of the ith value of the input x or output y.
+# b1 = sum((x(i) - mean(x)) * (y(i) - mean(y))) / sum( (x(i) - mean(x))^2 )
+# b0 = mean(y) - b1 * mean(x)
+# where the i refers to the ith index value of the input x or output y.
 
 from random import seed
 from random import randrange
@@ -40,7 +47,7 @@ def str_column_to_float(dataset, column):
 	for row in dataset:
 		row[column] = float(row[column].strip())
 
-# Split a dataset into a train and test set
+# Split a dataset into train and test sets
 def train_test_split(dataset, split):
 	train = list()
 	train_size = split * len(dataset)
@@ -105,14 +112,14 @@ def simple_linear_regression(train, test):
 		predictions.append(yhat)
 	return predictions
 
-# Simple linear regression on insurance dataset
-seed(1)
-# load and prepare data
-filename = 'insurance.csv'
-dataset = load_csv(filename)
-for i in range(len(dataset[0])):
-	str_column_to_float(dataset, i)
-# evaluate algorithm
-split = 0.6
-rmse = evaluate_algorithm(dataset, simple_linear_regression, split)
-print('RMSE: %.3f' % (rmse))
+# # Simple linear regression on insurance dataset
+# seed(1)
+# # load and prepare data
+# filename = 'insurance.csv'
+# dataset = load_csv(filename)
+# for i in range(len(dataset[0])):
+# 	str_column_to_float(dataset, i)
+# # evaluate algorithm
+# split = 0.6
+# rmse = evaluate_algorithm(dataset, simple_linear_regression, split)
+# print('RMSE: %.3f' % (rmse))

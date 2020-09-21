@@ -1,4 +1,8 @@
-# Logistic Regression on Diabetes Dataset
+'''
+@author : jhhalls
+'''
+
+# Logistic Regression 
 from random import seed
 from random import randrange
 from csv import reader
@@ -105,20 +109,20 @@ def logistic_regression(train, test, l_rate, n_epoch):
 		predictions.append(yhat)
 	return(predictions)
 
-# Test the logistic regression algorithm on the diabetes dataset
-seed(1)
-# load and prepare data
-filename = 'pima-indians-diabetes.data.csv'
-dataset = load_csv(filename)
-for i in range(len(dataset[0])):
-	str_column_to_float(dataset, i)
-# normalize
-minmax = dataset_minmax(dataset)
-normalize_dataset(dataset, minmax)
-# evaluate algorithm
-n_folds = 5
-l_rate = 0.1
-n_epoch = 100
-scores = evaluate_algorithm(dataset, logistic_regression, n_folds, l_rate, n_epoch)
-print('Scores: %s' % scores)
-print('Mean Accuracy: %.3f%%' % (sum(scores)/float(len(scores))))
+# # Test the logistic regression algorithm on the diabetes dataset
+# seed(1)
+# # load and prepare data
+# filename = 'pima-indians-diabetes.data.csv'
+# dataset = load_csv(filename)
+# for i in range(len(dataset[0])):
+# 	str_column_to_float(dataset, i)
+# # normalize
+# minmax = dataset_minmax(dataset)
+# normalize_dataset(dataset, minmax)
+# # evaluate algorithm
+# n_folds = 5
+# l_rate = 0.1
+# n_epoch = 100
+# scores = evaluate_algorithm(dataset, logistic_regression, n_folds, l_rate, n_epoch)
+# print('Scores: %s' % scores)
+# print('Mean Accuracy: %.3f%%' % (sum(scores)/float(len(scores))))
